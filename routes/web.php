@@ -35,3 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{order}/payment', [PaymentController::class, 'create'])->name('payment.create');
     Route::post('/orders/{order}/payment', [PaymentController::class, 'store'])->name('payment.store');
 });
+
+Route::get('/fresh', function () {
+    return view('layouts.app');
+});
