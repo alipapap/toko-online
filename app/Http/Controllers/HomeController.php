@@ -13,23 +13,16 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-            $query = Product::query()->with('store');
-    
-            // Filter pencarian nama produk
-            if ($request->filled('q')) {
-                $query->where('name', 'like', '%' . $request->input('q') . '%');
-            }
-    
-            // Filter berdasarkan toko
-            if ($request->filled('store_id')) {
-                $query->where('store_id', $request->input('store_id'));
-            }
-    
-            $products = $query->latest()->get();
-            $stores   = Store::orderBy('name')->get();
-    
-            return view('home.index', compact('products', 'stores'));
-        
+        $products = Product::with('store')
+            ->latest()
+            ->take(8)
+            ->get();
+ 
+        $stores = Store::orderBy('name')
+            ->take(8)
+            ->get();
+ 
+        return view('frontend.home.index', compact('products', 'stores'));
     }
 
     /**
