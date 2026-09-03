@@ -3,15 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Store;
 
 class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+            $query = Product::query()->with('store');
+    
+            // Filter pencarian nama produk
+            if ($request->filled('q')) {
+                $query->where('name', 'like', '%' . $request->input('q') . '%');
+            }
+    
+            // Filter berdasarkan toko
+            if ($request->filled('store_id')) {
+                $query->where('store_id', $request->input('store_id'));
+            }
+    
+            $products = $query->latest()->get();
+            $stores   = Store::orderBy('name')->get();
+    
+            return view('home.index', compact('products', 'stores'));
+        
     }
 
     /**

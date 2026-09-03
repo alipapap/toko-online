@@ -7,6 +7,10 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/produk/cari', [HomeController::class, 'index'])->name('products.search');
 
 // Katalog (publik, tidak perlu login)
 Route::get('/', [ProductController::class, 'index'])->name('home');
