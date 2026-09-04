@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
 
 class PaymentController extends Controller
 {
@@ -82,5 +87,32 @@ class PaymentController extends Controller
         return redirect()
             ->route('orders.show', $order)
             ->with('success', 'Pembayaran berhasil!');
+    }
+
+    /**
+     * Generate QR code otomatis untuk order ini (demo/tugas — bukan QR pembayaran nyata).
+     */
+    public function qrCode(Order $order)
+    {
+        // Pastikan order milik user yang sedang login
+        abort_unless($order->user_id === auth()->id(), 403);
+
+        $content = "TokoKita | Order #{$order->id} | Total: Rp "
+            . number_format($order->total_amount, 0, ',', '.');
+
+        $builder = new Builder(
+            writer: new PngWriter(),
+            data: $content,
+            encoding: new Encoding('UTF-8'),
+            errorCorrectionLevel: ErrorCorrectionLevel::High,
+            size: 300,
+            margin: 10,
+            roundBlockSizeMode: RoundBlockSizeMode::Margin,
+        );
+
+        $result = $builder->build();
+
+        return response($result->getString(), 200)
+            ->header('Content-Type', $result->getMimeType());
     }
 }
