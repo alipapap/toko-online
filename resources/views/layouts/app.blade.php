@@ -179,7 +179,7 @@
                     <li class="nav-item">
 
                         <a
-                            href="{{ route('home') }}"
+                            href="{{ route('frontend.products.index') }}"
                             class="nav-link"
                         >
                             Produk
