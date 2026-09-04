@@ -639,7 +639,8 @@
 
                     @foreach($stores as $store)
 
-                        <div class="store-card">
+                        <a href="{{ route('frontend.products.index', ['store_id' => $store->id]) }}"
+                        class="store-card">
 
                             <div class="store-avatar">
                                 {{ strtoupper(substr($store->name, 0, 1)) }}
@@ -653,7 +654,7 @@
                                 {{ $store->address ?? 'Toko pilihan TokoKita' }}
                             </p>
 
-                        </div>
+                        </a>
 
                     @endforeach
 
