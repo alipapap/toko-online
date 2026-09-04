@@ -45,10 +45,16 @@ class CheckoutController extends Controller
             }
         }
 
-        $order = DB::transaction(function () use ($cart, $products) {
+        // Hitung total dari isi keranjang
+        $total = collect($cart)->sum(function ($qty, $productId) use ($products) {
+            return $qty * $products->get($productId)->price;
+        });
+
+        $order = DB::transaction(function () use ($cart, $products, $total) {
             $order = Order::create([
                 'user_id' => Auth::id(),
                 'status' => 'pending',
+                'total_amount' => $total,
             ]);
 
             foreach ($cart as $productId => $qty) {

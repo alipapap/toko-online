@@ -24,7 +24,7 @@ class PaymentController extends Controller
         }
 
         // Pastikan total order tersedia
-        if (is_null($order->total)) {
+        if (is_null($order->total_amount)) {
             return redirect()
                 ->route('orders.show', $order)
                 ->with('error', 'Total pesanan tidak ditemukan. Silakan hubungi admin.');
@@ -57,7 +57,7 @@ class PaymentController extends Controller
         }
 
         // Pastikan total order tidak NULL
-        if (is_null($order->total)) {
+        if (is_null($order->total_amount)) {
             return redirect()
                 ->route('orders.show', $order)
                 ->with(
@@ -70,7 +70,7 @@ class PaymentController extends Controller
         Payment::create([
             'order_id' => $order->id,
             'method'   => $data['method'],
-            'amount'   => $order->total,
+            'amount'   => $order->total_amount,
         ]);
 
         // Ubah status order menjadi paid

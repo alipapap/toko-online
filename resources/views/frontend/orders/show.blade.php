@@ -73,7 +73,8 @@
 
                     <h3 class="fw-bold text-primary mb-0">
 
-                        Rp {{ number_format($order->total, 0, ',', '.') }}
+                        {{-- DIPERBAIKI: total -> total_amount --}}
+                        Rp {{ number_format($order->total_amount, 0, ',', '.') }}
 
                     </h3>
 
@@ -225,9 +226,10 @@
 
                             <span class="fs-4 fw-bold text-primary">
 
+                                {{-- DIPERBAIKI: total -> total_amount --}}
                                 Rp
                                 {{ number_format(
-                                    $order->total,
+                                    $order->total_amount,
                                     0,
                                     ',',
                                     '.'

@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="fs-1 fw-bold mt-2">
-                    Rp {{ number_format($order->total, 0, ',', '.') }}
+                    Rp {{ number_format($order->total_amount, 0, ',', '.') }}
                 </div>
 
             </div>
@@ -162,7 +162,7 @@
                             </span>
 
                             <strong class="text-primary fs-5">
-                                Rp {{ number_format($order->total, 0, ',', '.') }}
+                                Rp {{ number_format($order->total_amount, 0, ',', '.') }}
                             </strong>
 
                         </div>
