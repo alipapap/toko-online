@@ -102,6 +102,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/orders/{order}/payment', [PaymentController::class, 'store'])
         ->name('payment.store');
+
+    // QR Code pembayaran (auto-generate per order)
+    Route::get('/orders/{order}/qr', [PaymentController::class, 'qrCode'])
+        ->name('order.qr');
 });
 
 
