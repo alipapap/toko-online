@@ -733,7 +733,7 @@
 
                     <a href="{{ route('frontend.products.index') }}"
                        class="section-link">
-                        Lihat semua →
+                        Lihat Semuaa
                     </a>
 
                 </div>
@@ -805,7 +805,7 @@
 
                     <a href="{{ route('frontend.products.index') }}"
                        class="btn-shopping btn-primary-shopping">
-                        🛒 Belanja Sekarang
+                        🛒 Belanja Sekarang 🛒🛒
                     </a>
 
                 </div>
