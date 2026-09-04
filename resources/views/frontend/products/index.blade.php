@@ -282,6 +282,13 @@
 
     }
 
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
 
     .product-letter {
 
@@ -572,16 +579,16 @@
 
                 <div class="product-card">
 
-                    {{-- GAMBAR / HURUF --}}
-
+                    {{-- GAMBAR PRODUK --}}
                     <div class="product-image">
-
-                        <div class="product-letter">
-
-                            {{ strtoupper(substr($product->name, 0, 1)) }}
-
-                        </div>
-
+                        @if($product->image)
+                            <img src="{{ asset('storage/' . $product->image) }}"
+                                alt="{{ $product->name }}">
+                        @else
+                            <div class="product-letter">
+                                {{ strtoupper(substr($product->name, 0, 1)) }}
+                            </div>
+                        @endif
                     </div>
 
 

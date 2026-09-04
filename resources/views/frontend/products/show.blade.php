@@ -24,19 +24,27 @@
         <div class="bg-white rounded-4 shadow-sm border overflow-hidden">
 
             {{-- PRODUCT IMAGE --}}
-            <div class="relative h-[360px] bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100 flex items-center justify-center">
+            <div class="relative h-[360px] bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100 flex items-center justify-center overflow-hidden">
 
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-violet-200/40 rounded-full"></div>
+                @if($product->image)
 
-                <div class="absolute -bottom-16 -left-10 w-48 h-48 bg-indigo-200/40 rounded-full"></div>
+                    <img
+                        src="{{ asset('storage/' . $product->image) }}"
+                        alt="{{ $product->name }}"
+                        class="w-full h-full object-cover"
+                    >
 
-                <div class="relative w-32 h-32 bg-white rounded-3xl shadow-lg flex items-center justify-center">
+                @else
 
-                    <span class="text-6xl font-bold text-violet-500">
-                        {{ strtoupper(substr($product->name, 0, 1)) }}
-                    </span>
+                    <div class="relative w-32 h-32 bg-white rounded-3xl shadow-lg flex items-center justify-center">
 
-                </div>
+                        <span class="text-6xl font-bold text-violet-500">
+                            {{ strtoupper(substr($product->name, 0, 1)) }}
+                        </span>
+
+                    </div>
+
+                @endif
 
             </div>
 

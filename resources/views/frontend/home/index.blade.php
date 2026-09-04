@@ -427,6 +427,13 @@
         font-weight: 900;
     }
 
+    .mini-product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
     .mini-product-body {
         padding: 17px;
     }
@@ -746,7 +753,12 @@
                         <div class="mini-product">
 
                             <div class="mini-product-image">
-                                {{ strtoupper(substr($product->name, 0, 1)) }}
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}"
+                                        alt="{{ $product->name }}">
+                                @else
+                                    {{ strtoupper(substr($product->name, 0, 1)) }}
+                                @endif
                             </div>
 
                             <div class="mini-product-body">
