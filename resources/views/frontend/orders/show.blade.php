@@ -133,8 +133,8 @@
 
                 <tbody>
 
-                    {{-- PERBAIKAN DI SINI --}}
-                    @forelse ($order->details as $detail)
+                    {{-- DIPERBAIKI: details -> orderDetails (sesuai nama relasi di model Order) --}}
+                    @forelse ($order->orderDetails as $detail)
 
                         @php
                             $subtotal =
