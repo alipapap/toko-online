@@ -19,6 +19,8 @@ class ProductsTable
             ->columns([
                 ImageColumn::make('image')
                     ->label('Gambar')
+                    ->disk('public')
+                    ->visibility('public')
                     ->square(),
                 TextColumn::make('store_id')
                     ->numeric()

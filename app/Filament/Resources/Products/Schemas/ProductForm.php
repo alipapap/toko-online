@@ -23,8 +23,7 @@ class ProductForm
                 FileUpload::make('image')
                     ->image()
                     ->disk('public')
-                    ->directory('products')
-                    ->nullable(),
+                    ->directory('products'),
                 TextInput::make('price')
                     ->required()
                     ->numeric()
