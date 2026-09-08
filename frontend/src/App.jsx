@@ -2,10 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import './App.css';
+import Home from "./Components/Home/Home"; 
 
-function Home() {
-  return <h1>Toko Online - Home</h1>;
-}
 
 function App() {
   return (
