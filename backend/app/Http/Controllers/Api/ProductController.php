@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -12,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection(Product::all());
+        return ProductResource::collection(Product::with('store')->get());
     }
 
     /**
@@ -28,7 +30,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return new ProductResource(Product::findOrFail($id));
     }
 
     /**
