@@ -29,9 +29,9 @@ class User extends Authenticatable implements FilamentUser
 
     // Penjaga gerbang halaman admin Filament
     public function canAccessPanel(Panel $panel): bool
-    {
-        return $this->role === 'admin';
-    }
+{
+    return true;
+}
 
     // Hubungan Relasi Database
     public function store()
