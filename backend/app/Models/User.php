@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Filament\Models\Contracts\FilamentUser;   // <-- tambahkan
-use Filament\Panel;                            // <-- tambahkan
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-#[Fillable(['name', 'email', 'password'])]
+// 'role' sudah ditambahkan di bawah ini agar bisa diisi ke database
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable implements FilamentUser   // <-- tambahkan implements
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -26,11 +27,13 @@ class User extends Authenticatable implements FilamentUser   // <-- tambahkan im
         ];
     }
 
+    // Penjaga gerbang halaman admin Filament
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->role === 'admin';
     }
 
+    // Hubungan Relasi Database
     public function store()
     {
         return $this->hasOne(Store::class);
