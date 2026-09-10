@@ -1,6 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Layout({ children }) {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   return (
     <div className="products-page">
 
@@ -16,8 +26,20 @@ export default function Layout({ children }) {
 
         <div className="products-navactions">
           <button className="btn-cart">Keranjang</button>
-          <span className="nav-username">alifatul</span>
-          <button className="btn-logout">Logout</button>
+
+          {token && user ? (
+            <>
+              <span className="nav-username">{user.name}</span>
+              <button className="btn-logout" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn-cart">Login</Link>
+              <Link to="/register" className="btn-logout">Daftar</Link>
+            </>
+          )}
         </div>
       </nav>
 

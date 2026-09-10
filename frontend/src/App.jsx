@@ -3,7 +3,8 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import './App.css';
 import Home from "./Components/Home/Home";
-import Products from "./Components/Pages/Products"; 
+import Products from "./Components/Pages/Products";
+import ProductDetail from "./Components/Pages/ProductDetail";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
       </Routes>
     </BrowserRouter>
   );

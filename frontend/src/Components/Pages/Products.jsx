@@ -17,7 +17,7 @@ export default function Products() {
 
   useEffect(() => {
     setLoading(true);
-    Promise.all([axios.get("/products"), axios.get("/toko")])
+    Promise.all([axios.get("/products"), axios.get("/stores")])
       .then(([resProducts, resStores]) => {
         setAllProducts(resProducts.data.data ?? resProducts.data);
         setStores(resStores.data.data ?? resStores.data);
@@ -135,7 +135,9 @@ export default function Products() {
                     <div className="product-stock">
                       Stok tersedia: <b>{product.stock}</b>
                     </div>
-                    <button className="btn-detail">Lihat Detail</button>
+                    <Link to={`/products/${product.id}`} className="btn-detail">
+                      Lihat Detail
+                    </Link>
                   </div>
                 </div>
               ))}

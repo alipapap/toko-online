@@ -685,3 +685,59 @@
     gap: 10px;
   }
 }
+
+/* =====================================================
+   NAV AUTH BUTTONS (belum login)
+===================================================== */
+
+a.nav-btn-login {
+  display: inline-block;
+
+  background: #7c3aed;
+  color: white;
+
+  border: none;
+  border-radius: 50px;
+
+  padding: 10px 20px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+
+a.nav-btn-login:hover {
+  background: #6d28d9;
+  color: white;
+  text-decoration: none;
+}
+
+a.nav-btn-register {
+  display: inline-block;
+
+  background: white;
+  color: #7c3aed;
+
+  border: 1.5px solid #7c3aed;
+  border-radius: 50px;
+
+  padding: 10px 20px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: all 0.2s;
+}
+
+a.nav-btn-register:hover {
+  background: #7c3aed;
+  color: white;
+  text-decoration: none;
+}

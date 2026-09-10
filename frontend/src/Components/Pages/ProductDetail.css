@@ -1,0 +1,253 @@
+.product-detail-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.btn-detail {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-sizing: border-box;
+}
+
+.btn-detail:hover {
+  background: #1d4ed8;
+  color: white;
+  text-decoration: none;
+}
+
+.detail-loading {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.detail-back {
+  margin-bottom: 16px;
+}
+.detail-back a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 14px;
+}
+.detail-back a:hover {
+  text-decoration: underline;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.detail-image {
+  height: 360px;
+  background: linear-gradient(135deg, #ede9fe, #f5f3ff, #e0e7ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.detail-letter {
+  width: 128px;
+  height: 128px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail-letter span {
+  font-size: 60px;
+  font-weight: 800;
+  color: #8b5cf6;
+}
+
+.detail-body {
+  padding: 32px;
+}
+.detail-store-label {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.detail-store-name {
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.detail-title {
+  font-weight: 800;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.detail-price {
+  color: #2563eb;
+  font-weight: 800;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.detail-stock-row {
+  margin-bottom: 20px;
+}
+.badge-stock-ok {
+  background: #dcfce7;
+  color: #16a34a;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.badge-stock-empty {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.detail-stock-text {
+  color: #64748b;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.detail-description {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+}
+.detail-description h5 {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.detail-description p {
+  color: #64748b;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.detail-weight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.detail-weight span {
+  color: #64748b;
+}
+
+.buy-panel {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 24px;
+  position: sticky;
+  top: 90px;
+}
+.buy-panel h5 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.buy-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+.buy-row span {
+  color: #64748b;
+}
+.buy-message {
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.buy-quantity {
+  margin-bottom: 16px;
+}
+.buy-quantity label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.buy-quantity input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 15px;
+}
+.buy-quantity small {
+  display: block;
+  color: #64748b;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.btn-buy {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-buy:hover {
+  background: #1d4ed8;
+  color: white;
+}
+.btn-buy-disabled {
+  width: 100%;
+  background: #9ca3af;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px;
+  font-weight: 600;
+  cursor: not-allowed;
+}
+.buy-register-hint {
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  margin-top: 12px;
+}
+.buy-register-hint a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
