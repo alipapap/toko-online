@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
 
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -16,7 +17,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
+    Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/{product}', [CartController::class, 'add']);
+    Route::patch('/cart/{product}', [CartController::class, 'update']);
+    Route::delete('/cart/{product}', [CartController::class, 'remove']);
 });
 
 Route::get('/stores', [StoreController::class, 'index']);

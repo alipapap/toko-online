@@ -5,6 +5,7 @@ import './App.css';
 import Home from "./Components/Home/Home";
 import Products from "./Components/Pages/Products";
 import ProductDetail from "./Components/Pages/ProductDetail";
+import Cart from "./Components/Pages/Cart";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );

@@ -33,6 +33,7 @@ export default function ProductDetail() {
     try {
       await axios.post(`/cart/${id}`, { quantity });
       setMessage("Produk berhasil ditambahkan ke keranjang!");
+      window.dispatchEvent(new Event("cart-updated"));
     } catch (err) {
       setMessage("Gagal menambahkan produk ke keranjang.");
     } finally {
@@ -60,7 +61,7 @@ export default function ProductDetail() {
     <Layout>
       <div className="product-detail-page">
         <div className="detail-back">
-          <Link to="/">← Kembali ke katalog</Link>
+          <Link to="/products">← Kembali ke katalog</Link>
         </div>
 
         <div className="detail-grid">
