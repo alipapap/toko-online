@@ -6,7 +6,7 @@ import Home from "./Components/Home/Home";
 import Products from "./Components/Pages/Products";
 import ProductDetail from "./Components/Pages/ProductDetail";
 import Cart from "./Components/Pages/Cart";
-
+import Checkout from "./Components/Pages/Checkout";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   );

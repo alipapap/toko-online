@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
-
+use App\Http\Controllers\Api\CheckoutController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -21,6 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/cart/{product}', [CartController::class, 'add']);
     Route::patch('/cart/{product}', [CartController::class, 'update']);
     Route::delete('/cart/{product}', [CartController::class, 'remove']);
+
+    Route::get('/checkout', [CheckoutController::class, 'index']);
+    Route::post('/checkout', [CheckoutController::class, 'store']);
 });
 
 Route::get('/stores', [StoreController::class, 'index']);
