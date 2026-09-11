@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "../../api/axios"; // sesuaikan path kalau berbeda di project kamu
-import "./Home.css";
+import axios from "../../api/axios";
+import Layout from "../Layouts";
 
 export default function Home() {
   const [stores, setStores] = useState([]);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // GANTI endpoint di bawah sesuai route API kamu yang sebenarnya
     axios
       .get("/stores")
       .then((res) => setStores(res.data.data ?? res.data))
@@ -24,208 +23,261 @@ export default function Home() {
     "Rp " + Number(value ?? 0).toLocaleString("id-ID");
 
   return (
-    <div className="home-page">
-      <div className="home-container">
-        {/* ===================== HERO ===================== */}
-        <section className="hero-shopping">
-          <div className="hero-content">
-            <div>
-              <div className="hero-badge">
-                🛍️ Belanja lebih mudah di TokoKita
-              </div>
+    <Layout>
+      <div className="container py-4">
 
-              <h1 className="hero-title">
-                Temukan barang yang <span>kamu suka.</span>
+        {/* ===================== HERO ===================== */}
+        <div
+          className="position-relative rounded-5 overflow-hidden text-white p-5 mb-4"
+          style={{
+            minHeight: "400px",
+            background: "linear-gradient(135deg, #5b21f5 0%, #7c3aed 45%, #9333ea 100%)",
+            boxShadow: "0 25px 60px rgba(91, 33, 245, .22)",
+          }}
+        >
+          <div className="row align-items-center h-100">
+            <div className="col-lg-7">
+              <span
+                className="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill mb-3"
+                style={{
+                  background: "rgba(255,255,255,.16)",
+                  border: "1px solid rgba(255,255,255,.25)",
+                  fontSize: "13px",
+                  fontWeight: 700,
+                }}
+              >
+                🛍️ Belanja lebih mudah di TokoKita
+              </span>
+
+              <h1 className="fw-bold display-4 mb-3">
+                Temukan barang yang{" "}
+                <span style={{ color: "#fde68a" }}>kamu suka.</span>
               </h1>
 
-              <p className="hero-description">
+              <p className="mb-4" style={{ color: "rgba(255,255,255,.85)", fontSize: "16px", maxWidth: "520px" }}>
                 Jelajahi berbagai produk pilihan dari toko-toko terpercaya.
                 Cari, pilih, dan belanja semuanya dalam satu tempat.
               </p>
 
-              <div className="hero-buttons">
-                <Link to="/products" className="btn-shopping btn-primary-shopping">
+              <div className="d-flex flex-wrap gap-3">
+                <Link to="/products" className="btn btn-light btn-lg rounded-3 fw-bold">
                   🛒 Mulai Belanja
                 </Link>
-                <a href="#toko" className="btn-shopping btn-outline-shopping">
+                
+                 <a href="#toko"
+                  className="btn btn-outline-light btn-lg rounded-3 fw-bold"
+                >
                   🏪 Jelajahi Toko
                 </a>
               </div>
             </div>
 
-            {/* Ilustrasi shopping */}
-            <div className="hero-visual">
-              <div className="shopping-circle"></div>
-
-              <div className="floating-card floating-one">
-                <div className="floating-card-icon">🎁</div>
-                <div>
-                  Banyak pilihan
-                  <br />
-                  <span style={{ color: "#7c3aed" }}>untuk kamu</span>
+            <div className="col-lg-5 d-none d-lg-flex justify-content-center">
+              <div
+                className="bg-white rounded-4 shadow-lg d-flex flex-column align-items-center justify-content-center"
+                style={{ width: "190px", height: "205px", transform: "rotate(5deg)" }}
+              >
+                <div
+                  className="rounded-4 d-flex align-items-center justify-content-center text-white fw-bold mb-3"
+                  style={{ width: "65px", height: "65px", background: "#7c3aed", fontSize: "27px" }}
+                >
+                  TK
                 </div>
-              </div>
-
-              <div className="shopping-bag">
-                <div className="bag-logo">TK</div>
-                <div className="bag-text">TOKOKITA</div>
-              </div>
-
-              <div className="floating-card floating-two">
-                <div className="floating-card-icon">⚡</div>
-                <div>
-                  Belanja cepat
-                  <br />
-                  <span style={{ color: "#7c3aed" }}>dan praktis</span>
+                <div className="fw-bold" style={{ color: "#5b21f5", fontSize: "14px" }}>
+                  TOKOKITA
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
         {/* ===================== FEATURES ===================== */}
-        <section className="features">
-          <div className="feature">
-            <div className="feature-icon">🛍️</div>
-            <div>
-              <h3>Belanja Praktis</h3>
-              <p>Pilih produk tanpa ribet.</p>
+        <div className="row g-3 mb-5">
+          <div className="col-md-4">
+            <div className="bg-white border rounded-4 p-4 d-flex align-items-center gap-3 h-100">
+              <div
+                className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
+              >
+                🛍️
+              </div>
+              <div>
+                <h6 className="fw-bold mb-1">Belanja Praktis</h6>
+                <p className="text-secondary small mb-0">Pilih produk tanpa ribet.</p>
+              </div>
             </div>
           </div>
 
-          <div className="feature">
-            <div className="feature-icon">🏪</div>
-            <div>
-              <h3>Banyak Toko</h3>
-              <p>Temukan berbagai penjual.</p>
+          <div className="col-md-4">
+            <div className="bg-white border rounded-4 p-4 d-flex align-items-center gap-3 h-100">
+              <div
+                className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
+              >
+                🏪
+              </div>
+              <div>
+                <h6 className="fw-bold mb-1">Banyak Toko</h6>
+                <p className="text-secondary small mb-0">Temukan berbagai penjual.</p>
+              </div>
             </div>
           </div>
 
-          <div className="feature">
-            <div className="feature-icon">📦</div>
-            <div>
-              <h3>Pesanan Terorganisir</h3>
-              <p>Pantau pesanan dengan mudah.</p>
+          <div className="col-md-4">
+            <div className="bg-white border rounded-4 p-4 d-flex align-items-center gap-3 h-100">
+              <div
+                className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
+              >
+                📦
+              </div>
+              <div>
+                <h6 className="fw-bold mb-1">Pesanan Terorganisir</h6>
+                <p className="text-secondary small mb-0">Pantau pesanan dengan mudah.</p>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
 
         {/* ===================== TOKO PILIHAN ===================== */}
-        <section className="home-section" id="toko">
-          <div className="section-heading">
-            <div>
-              <h2>🏪 Temukan Toko</h2>
-              <p>Jelajahi toko yang tersedia di TokoKita.</p>
-            </div>
+        <div className="mb-5" id="toko">
+          <div className="mb-4">
+            <h3 className="fw-bold mb-1">🏪 Temukan Toko</h3>
+            <p className="text-secondary mb-0">Jelajahi toko yang tersedia di TokoKita.</p>
           </div>
 
           {stores.length > 0 ? (
-            <div className="store-grid">
+            <div className="row g-3">
               {stores.map((store) => (
-                <Link
-                  key={store.id}
-                  to={`/products?store_id=${store.id}`}
-                  className="store-card"
-                >
-                  <div className="store-avatar">
-                    {store.name?.charAt(0).toUpperCase()}
-                  </div>
-                  <h3>{store.name}</h3>
-                  <p>{store.address ?? "Toko pilihan TokoKita"}</p>
-                </Link>
+                <div className="col-6 col-md-3" key={store.id}>
+                  <Link
+                    to={`/products?store_id=${store.id}`}
+                    className="d-block bg-white border rounded-4 p-4 text-decoration-none text-dark h-100"
+                  >
+                    <div
+                      className="d-flex align-items-center justify-content-center rounded-3 mb-3 fw-bold"
+                      style={{
+                        width: "55px",
+                        height: "55px",
+                        background: "linear-gradient(135deg, #ede9fe, #ddd6fe)",
+                        color: "#6d28d9",
+                        fontSize: "21px",
+                      }}
+                    >
+                      {store.name?.charAt(0).toUpperCase()}
+                    </div>
+                    <h6 className="fw-bold mb-1">{store.name}</h6>
+                    <p className="text-secondary small mb-0">
+                      {store.address ?? "Toko pilihan TokoKita"}
+                    </p>
+                  </Link>
+                </div>
               ))}
             </div>
           ) : (
-            <div className="feature">
-              <div className="feature-icon">🏪</div>
+            <div className="bg-white border rounded-4 p-4 d-flex align-items-center gap-3">
+              <div
+                className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
+              >
+                🏪
+              </div>
               <div>
-                <h3>Belum ada toko</h3>
-                <p>Toko akan muncul di sini.</p>
+                <h6 className="fw-bold mb-1">Belum ada toko</h6>
+                <p className="text-secondary small mb-0">Toko akan muncul di sini.</p>
               </div>
             </div>
           )}
-        </section>
+        </div>
 
         {/* ===================== PROMO BANNER ===================== */}
-        <section className="home-section">
-          <div className="promo-banner">
+        <div className="mb-5">
+          <div
+            className="rounded-4 p-5 text-white d-flex flex-wrap justify-content-between align-items-center gap-4"
+            style={{ background: "#111827" }}
+          >
             <div>
-              <div className="promo-label">✨ Saatnya Belanja</div>
-              <h2>Satu tempat untuk banyak kebutuhan.</h2>
-              <p>
+              <div
+                className="fw-bold mb-2"
+                style={{ color: "#c4b5fd", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px" }}
+              >
+                ✨ Saatnya Belanja
+              </div>
+              <h3 className="fw-bold mb-2">Satu tempat untuk banyak kebutuhan.</h3>
+              <p className="mb-0" style={{ color: "#cbd5e1", maxWidth: "600px" }}>
                 Tidak perlu berpindah-pindah. Temukan produk dari berbagai
                 toko dan pilih yang paling cocok untukmu.
               </p>
             </div>
-            <div>
-              <Link to="/products" className="btn-shopping btn-primary-shopping">
-                Lihat Semua Produk →
-              </Link>
-            </div>
+            <Link to="/products" className="btn btn-light btn-lg rounded-3 fw-bold">
+              Lihat Semua Produk →
+            </Link>
           </div>
-        </section>
+        </div>
 
         {/* ===================== PRODUK PILIHAN ===================== */}
         {products.length > 0 && (
-          <section className="home-section">
-            <div className="section-heading">
+          <div className="mb-5">
+            <div className="d-flex justify-content-between align-items-end mb-4">
               <div>
-                <h2>✨ Sedang Banyak Dilihat</h2>
-                <p>Beberapa produk pilihan dari TokoKita.</p>
+                <h3 className="fw-bold mb-1">✨ Sedang Banyak Dilihat</h3>
+                <p className="text-secondary mb-0">Beberapa produk pilihan dari TokoKita.</p>
               </div>
-              <Link to="/products" className="section-link">
-                Lihat Semuaa
+              <Link to="/products" className="text-decoration-none fw-bold" style={{ color: "#6d28d9" }}>
+                Lihat Semua
               </Link>
             </div>
 
-            <div className="product-preview">
+            <div className="row g-3">
               {products.slice(0, 4).map((product) => (
-                <div className="mini-product" key={product.id}>
-                  <div className="mini-product-image">
-                    {product.image ? (
-                      <img
-                        src={`${import.meta.env.VITE_API_URL ?? ""}/storage/${product.image}`}
-                        alt={product.name}
-                      />
-                    ) : (
-                      product.name?.charAt(0).toUpperCase()
-                    )}
-                  </div>
-
-                  <div className="mini-product-body">
-                    <small>{product.store?.name ?? "TokoKita"}</small>
-                    <h3>{product.name}</h3>
-                    <div className="mini-product-price">
-                      {formatRupiah(product.price)}
+                <div className="col-6 col-md-3" key={product.id}>
+                  <div className="bg-white border rounded-4 overflow-hidden h-100">
+                    <div
+                      className="d-flex align-items-center justify-content-center"
+                      style={{ height: "150px", background: "#f7f5ff", color: "#7c3aed", fontSize: "35px", fontWeight: 900 }}
+                    >
+                      {product.image ? (
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-100 h-100"
+                          style={{ objectFit: "cover" }}
+                        />
+                      ) : (
+                        product.name?.charAt(0).toUpperCase()
+                      )}
+                    </div>
+                    <div className="p-3">
+                      <small className="text-secondary">{product.store?.name ?? "TokoKita"}</small>
+                      <h6 className="fw-bold my-1">{product.name}</h6>
+                      <div className="fw-bold text-primary">{formatRupiah(product.price)}</div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         )}
 
         {/* ===================== FINAL CTA ===================== */}
-        <section className="home-section" style={{ paddingBottom: 70 }}>
+        <div className="mb-4">
           <div
-            className="promo-banner"
+            className="rounded-4 p-5 text-white d-flex flex-wrap justify-content-between align-items-center gap-4"
             style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }}
           >
             <div>
-              <div className="promo-label" style={{ color: "#ddd6fe" }}>
+              <div className="fw-bold mb-2" style={{ color: "#ddd6fe", fontSize: "12px", textTransform: "uppercase" }}>
                 TOKOKITA
               </div>
-              <h2>Sudah siap mulai belanja?</h2>
-              <p>Temukan produk favoritmu sekarang.</p>
+              <h3 className="fw-bold mb-2">Sudah siap mulai belanja?</h3>
+              <p className="mb-0">Temukan produk favoritmu sekarang.</p>
             </div>
-            <div>
-              <Link to="/products" className="btn-shopping btn-primary-shopping">
-                🛒 Belanja Sekarang 🛒🛒
-              </Link>
-            </div>
+            <Link to="/products" className="btn btn-light btn-lg rounded-3 fw-bold">
+              🛒 Belanja Sekarang
+            </Link>
           </div>
-        </section>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
