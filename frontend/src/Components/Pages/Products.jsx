@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import axios from "../../api/axios";
-import "./Products.css";
 import Layout from "../Layouts";
 
 export default function Products() {
@@ -45,46 +44,81 @@ export default function Products() {
   const storeName = (id) => stores.find((s) => String(s.id) === String(id))?.name;
 
   return (
-  <Layout>
-    <div className="products-page">
+    <Layout>
+      <div className="container py-4">
 
-      <div className="products-container">
         {/* HERO */}
-        <section className="products-hero">
-          <div>
-            <span className="hero-badge-small">Belanja lebih mudah</span>
-            <h1>Temukan Produk Favoritmu</h1>
-            <p>
+        <div
+          className="position-relative rounded-4 overflow-hidden mb-5 p-5 text-white d-flex align-items-center justify-content-between"
+          style={{
+            minHeight: "270px",
+            background: "linear-gradient(120deg, #7c3aed, #a855f7, #4f46e5)",
+            boxShadow: "0 15px 30px rgba(79, 70, 229, .18)",
+          }}
+        >
+          <div style={{ position: "relative", zIndex: 2, maxWidth: "650px" }}>
+            <span
+              className="d-inline-block mb-3 px-3 py-2 rounded-pill"
+              style={{
+                border: "1px solid rgba(255,255,255,.7)",
+                fontSize: "13px",
+                fontWeight: 600,
+              }}
+            >
+              Belanja lebih mudah
+            </span>
+            <h1 className="fw-bold mb-3">Temukan Produk Favoritmu</h1>
+            <p className="mb-4" style={{ color: "rgba(255,255,255,.85)" }}>
               Temukan berbagai produk pilihan dari toko-toko yang tersedia di
               TokoKita.
             </p>
-            <Link to="/" className="btn-white">Mulai Belanja</Link>
+            <Link to="/" className="btn btn-light rounded-pill px-4 fw-semibold">
+              Mulai Belanja
+            </Link>
           </div>
-          <div className="hero-logo-circle">
-            <div>TK</div>
-            <span>TokoKita</span>
+
+          <div
+            className="d-none d-md-flex flex-column align-items-center justify-content-center rounded-circle"
+            style={{
+              width: "120px",
+              height: "120px",
+              background: "rgba(255,255,255,.10)",
+              position: "relative",
+              zIndex: 2,
+            }}
+          >
+            <div className="fw-bold" style={{ fontSize: "42px", lineHeight: 1 }}>
+              TK
+            </div>
+            <span style={{ color: "rgba(255,255,255,.8)", fontSize: "13px" }}>
+              TokoKita
+            </span>
           </div>
-        </section>
+        </div>
 
         {/* SEARCH */}
-        <section className="products-search">
-          <h3>Cari Produk</h3>
-          <p>Gunakan pencarian atau pilih toko untuk menemukan produk.</p>
+        <div className="bg-white rounded-4 shadow-sm border p-4 mb-4">
+          <h3 className="fw-bold mb-1">Cari Produk</h3>
+          <p className="text-secondary mb-4">
+            Gunakan pencarian atau pilih toko untuk menemukan produk.
+          </p>
 
-          <form className="search-form" onSubmit={handleSearch}>
-            <div className="search-field">
-              <label>Nama Produk</label>
+          <form className="row g-3 align-items-end" onSubmit={handleSearch}>
+            <div className="col-md-5">
+              <label className="form-label small">Nama Produk</label>
               <input
                 type="text"
+                className="form-control form-control-lg"
                 placeholder="Cari produk..."
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
               />
             </div>
 
-            <div className="search-field">
-              <label>Toko</label>
+            <div className="col-md-4">
+              <label className="form-label small">Toko</label>
               <select
+                className="form-select form-select-lg"
                 value={storeId}
                 onChange={(e) => setStoreId(e.target.value)}
               >
@@ -95,57 +129,95 @@ export default function Products() {
               </select>
             </div>
 
-            <button type="submit" className="btn-search">Cari</button>
+            <div className="col-md-3">
+              <button type="submit" className="btn btn-primary btn-lg w-100">
+                Cari
+              </button>
+            </div>
           </form>
-        </section>
+        </div>
 
         {/* PRODUCT GRID */}
-        <section className="products-list">
-          <div className="products-list-header">
+        <div>
+          <div className="d-flex justify-content-between align-items-center mb-3">
             <div>
-              <h3>Produk Pilihan</h3>
-              <p>Pilihan produk yang tersedia saat ini.</p>
+              <h3 className="fw-bold mb-1">Produk Pilihan</h3>
+              <p className="text-secondary mb-0">
+                Pilihan produk yang tersedia saat ini.
+              </p>
             </div>
-            <span className="products-count">
+            <span className="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
               {filteredProducts.length} Produk
             </span>
           </div>
 
           {loading ? (
-            <p>Memuat produk...</p>
+            <div className="bg-white rounded-4 border text-center py-5 text-secondary">
+              Memuat produk...
+            </div>
           ) : filteredProducts.length === 0 ? (
-            <p>Belum ada produk yang cocok.</p>
+            <div className="bg-white rounded-4 border text-center py-5 text-secondary">
+              Belum ada produk yang cocok.
+            </div>
           ) : (
-            <div className="products-grid">
+            <div className="row g-3">
               {filteredProducts.map((product) => (
-                <div className="product-card" key={product.id}>
-                  <div className="product-card-image">
-                    {product.image ? (
-                      <img src={product.image} alt={product.name} />
-                    ) : (
-                      <span>{product.name?.charAt(0).toUpperCase()}</span>
-                    )}
-                  </div>
-                  <div className="product-card-body">
-                    <small>{storeName(product.store_id) ?? "TokoKita"}</small>
-                    <h4>{product.name}</h4>
-                    <div className="product-price">
-                      {formatRupiah(product.price)}
+                <div className="col-12 col-sm-6 col-lg-3" key={product.id}>
+                  <div className="card h-100 border rounded-4 overflow-hidden">
+                    <div
+                      className="d-flex align-items-center justify-content-center"
+                      style={{
+                        height: "180px",
+                        background:
+                          "radial-gradient(circle at 80% 15%, #e9e4ff 0, #e9e4ff 20%, transparent 21%), radial-gradient(circle at 10% 90%, #e1e7ff 0, #e1e7ff 22%, transparent 23%), #f1efff",
+                      }}
+                    >
+                      {product.image ? (
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-100 h-100"
+                          style={{ objectFit: "cover" }}
+                        />
+                      ) : (
+                        <div
+                          className="d-flex align-items-center justify-content-center rounded-3 bg-white shadow-sm"
+                          style={{ width: "70px", height: "70px" }}
+                        >
+                          <span className="fw-bold fs-4 text-primary">
+                            {product.name?.charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <div className="product-stock">
-                      Stok tersedia: <b>{product.stock}</b>
+
+                    <div className="card-body">
+                      <small className="text-secondary d-block mb-1">
+                        {storeName(product.store_id) ?? "TokoKita"}
+                      </small>
+                      <h6 className="fw-bold" style={{ minHeight: "42px" }}>
+                        {product.name}
+                      </h6>
+                      <div className="text-primary fw-bold fs-6 mt-2">
+                        {formatRupiah(product.price)}
+                      </div>
+                      <div className="text-secondary small mt-1 mb-3">
+                        Stok tersedia: <strong className="text-success">{product.stock}</strong>
+                      </div>
+                      <Link
+                        to={`/products/${product.id}`}
+                        className="btn btn-primary w-100 rounded-pill"
+                      >
+                        Lihat Detail
+                      </Link>
                     </div>
-                    <Link to={`/products/${product.id}`} className="btn-detail">
-                      Lihat Detail
-                    </Link>
                   </div>
                 </div>
               ))}
             </div>
           )}
-        </section>
+        </div>
       </div>
-     </div>
-  </Layout>
+    </Layout>
   );
 }
