@@ -29,7 +29,7 @@ class PaymentController extends Controller
         }
 
         // Pastikan total order tersedia
-        if (is_null($order->total_amount)) {
+        if (is_null($order->total)) {
             return redirect()
                 ->route('orders.show', $order)
                 ->with('error', 'Total pesanan tidak ditemukan. Silakan hubungi admin.');
@@ -62,7 +62,7 @@ class PaymentController extends Controller
         }
 
         // Pastikan total order tidak NULL
-        if (is_null($order->total_amount)) {
+        if (is_null($order->total)) {
             return redirect()
                 ->route('orders.show', $order)
                 ->with(
@@ -75,7 +75,7 @@ class PaymentController extends Controller
         Payment::create([
             'order_id' => $order->id,
             'method'   => $data['method'],
-            'amount'   => $order->total_amount,
+            'amount'   => $order->total,
         ]);
 
         // Ubah status order menjadi paid
@@ -98,7 +98,7 @@ class PaymentController extends Controller
         abort_unless($order->user_id === auth()->id(), 403);
 
         $content = "TokoKita | Order #{$order->id} | Total: Rp "
-            . number_format($order->total_amount, 0, ',', '.');
+            . number_format($order->total, 0, ',', '.');
 
         $builder = new Builder(
             writer: new PngWriter(),

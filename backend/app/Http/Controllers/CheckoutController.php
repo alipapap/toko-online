@@ -54,7 +54,7 @@ class CheckoutController extends Controller
             $order = Order::create([
                 'user_id' => Auth::id(),
                 'status' => 'pending',
-                'total_amount' => $total,
+                'total' => $total,
             ]);
 
             foreach ($cart as $productId => $qty) {
@@ -64,7 +64,7 @@ class CheckoutController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $qty,
-                    'unit_price' => $product->price,
+                    'price' => $product->price,
                 ]);
 
                 $product->decrement('stock', $qty);

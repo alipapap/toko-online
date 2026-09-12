@@ -24,7 +24,7 @@ class OrderDetailsTable
                 TextColumn::make('quantity')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('unit_price')
+                TextColumn::make('price')
                     ->money()
                     ->sortable(),
                 TextColumn::make('created_at')

@@ -17,7 +17,7 @@ class OrderDetailInfolist
                     ->numeric(),
                 TextEntry::make('quantity')
                     ->numeric(),
-                TextEntry::make('unit_price')
+                TextEntry::make('price')
                     ->money(),
                 TextEntry::make('created_at')
                     ->dateTime()

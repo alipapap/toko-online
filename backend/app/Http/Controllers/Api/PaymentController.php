@@ -27,7 +27,7 @@ class PaymentController extends Controller
             ]);
         }
 
-        if (is_null($order->total_amount)) {
+        if (is_null($order->total)) {
             return response()->json([
                 'message' => 'Total pesanan tidak ditemukan.',
             ], 422);
@@ -49,14 +49,14 @@ class PaymentController extends Controller
             return response()->json(['message' => 'Pesanan ini sudah dibayar.'], 422);
         }
 
-        if (is_null($order->total_amount)) {
+        if (is_null($order->total)) {
             return response()->json(['message' => 'Total pesanan tidak ditemukan.'], 422);
         }
 
         Payment::create([
             'order_id' => $order->id,
             'method' => $data['method'],
-            'amount' => $order->total_amount,
+            'amount' => $order->total,
         ]);
 
         $order->update(['status' => 'paid']);
@@ -71,7 +71,7 @@ class PaymentController extends Controller
     public function qrCode(Order $order)
     {
         $content = "TokoKita | Order #{$order->id} | Total: Rp "
-            . number_format($order->total_amount, 0, ',', '.');
+            . number_format($order->total, 0, ',', '.');
 
         $builder = new Builder(
             writer: new PngWriter(),

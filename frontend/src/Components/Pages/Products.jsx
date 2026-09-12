@@ -28,6 +28,16 @@ export default function Products() {
   const formatRupiah = (value) =>
     "Rp " + Number(value ?? 0).toLocaleString("id-ID");
 
+  const getImageUrl = (image) => {
+    if (!image) return null;
+
+    if (image.startsWith("http")) {
+      return image;
+    }
+
+    return `http://127.0.0.1:8000/storage/${image}`;
+  };
+
   const filteredProducts = allProducts.filter((p) => {
     const matchKeyword = p.name
       ?.toLowerCase()
@@ -174,7 +184,7 @@ export default function Products() {
                     >
                       {product.image ? (
                         <img
-                          src={product.image}
+                          src={getImageUrl(product.image)}
                           alt={product.name}
                           className="w-100 h-100"
                           style={{ objectFit: "cover" }}

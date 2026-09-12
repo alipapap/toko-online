@@ -11,13 +11,14 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id',
-        'total_amount',
+        'total',
         'status',
     ];
 
-    /**
-     * Detail-detail dari pesanan
-     */
+     protected $casts = [
+        'total' => 'decimal:2',
+    ];
+    
     public function orderDetails(): HasMany
     {
         return $this->hasMany(OrderDetail::class, 'order_id');

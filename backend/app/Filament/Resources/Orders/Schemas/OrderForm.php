@@ -32,7 +32,7 @@ class OrderForm
                     ])
                     ->required(),
 
-                TextInput::make('total_amount')
+                TextInput::make('total')
                     ->label('Total')
                     ->numeric()
                     ->prefix('Rp')

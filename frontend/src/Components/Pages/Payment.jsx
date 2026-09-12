@@ -100,7 +100,7 @@ export default function Payment() {
                   Total tagihan
                 </div>
                 <div className="display-5 fw-bold mt-2">
-                  {formatRupiah(order.total_amount)}
+                  {formatRupiah(order.total)}
                 </div>
               </div>
 
@@ -219,7 +219,7 @@ export default function Payment() {
                     <div className="d-flex justify-content-between mb-4">
                       <span className="text-secondary">Total pembayaran</span>
                       <strong className="text-primary fs-5">
-                        {formatRupiah(order.total_amount)}
+                        {formatRupiah(order.total)}
                       </strong>
                     </div>
 

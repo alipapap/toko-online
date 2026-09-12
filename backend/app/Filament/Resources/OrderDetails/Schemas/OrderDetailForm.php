@@ -25,7 +25,7 @@ class OrderDetailForm
                 TextInput::make('quantity')
                     ->required()
                     ->numeric(),
-                TextInput::make('unit_price')
+                TextInput::make('price')
                     ->required()
                     ->numeric()
                     ->prefix('Rp'),

@@ -14,7 +14,9 @@ class OrderController extends Controller
             ->latest()
             ->get();
 
-        return view('frontend.orders.index', compact('orders'));
+        return response()->json([
+            'orders' => $orders
+        ]);
     }
 
     public function show(Order $order)

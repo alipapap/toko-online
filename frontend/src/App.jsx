@@ -8,6 +8,8 @@ import ProductDetail from "./Components/Pages/ProductDetail";
 import Cart from "./Components/Pages/Cart";
 import Checkout from "./Components/Pages/Checkout";
 import Payment from "./Components/Pages/Payment";
+import Orders from "./Components/Pages/Orders";
+import OrderDetail from "./Components/Pages/OrderDetail";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment/:orderId" element={<Payment />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders/:orderId" element={<OrderDetail />} />
       </Routes>
     </BrowserRouter>
   );

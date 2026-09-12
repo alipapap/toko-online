@@ -25,6 +25,16 @@ export default function ProductDetail() {
   const formatRupiah = (value) =>
     "Rp " + Number(value ?? 0).toLocaleString("id-ID");
 
+  const getImageUrl = (image) => {
+    if (!image) return null;
+
+    if (image.startsWith("http")) {
+      return image;
+    }
+
+    return `http://127.0.0.1:8000/storage/${image}`;
+  };
+
   const handleQuantityChange = (e) => {
     const val = parseInt(e.target.value, 10);
     if (isNaN(val) || val < 1) {
@@ -95,7 +105,7 @@ export default function ProductDetail() {
                 }}
               >
                 {product.image ? (
-                  <img src={product.image} alt={product.name} className="w-100 h-100 object-fit-cover" />
+                  <img src={getImageUrl(product.image)} alt={product.name} className="w-100 h-100 object-fit-cover" />
                 ) : (
                   <div className="bg-white rounded-4 shadow d-flex align-items-center justify-content-center" style={{ width: "128px", height: "128px" }}>
                     <span className="fw-bolder text-purple" style={{ fontSize: "60px", color: "#7c3aed" }}>
