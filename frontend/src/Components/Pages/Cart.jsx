@@ -27,6 +27,12 @@ export default function Cart() {
   const formatRupiah = (value) =>
     "Rp " + Number(value ?? 0).toLocaleString("id-ID");
 
+  const getImageUrl = (image) => {
+    if (!image) return null;
+    if (image.startsWith("http")) return image;
+    return `http://127.0.0.1:8000/storage/${image}`;
+  };
+
   const handleUpdateQuantity = async (productId, quantity) => {
     try {
       await axios.patch(`/cart/${productId}`, { quantity });
@@ -59,11 +65,11 @@ export default function Cart() {
     );
   }
 
-  return (
+    return (
     <Layout>
-      <div className="container py-4">
-        <div className="mb-4">
-          <h1 className="fw-bold mb-1">Keranjang Belanja</h1>
+      <div className="container py-5">
+        <div className="mb-5">
+          <h1 className="fw-bold mb-2">Keranjang Belanja</h1>
           <p className="text-secondary mb-0">
             Periksa kembali produk sebelum melanjutkan ke checkout.
           </p>
@@ -73,75 +79,109 @@ export default function Cart() {
           <div className="bg-white rounded-4 shadow-sm border p-5 text-center">
             <div
               className="mx-auto mb-4 rounded-circle bg-light d-flex align-items-center justify-content-center"
-              style={{ width: "80px", height: "80px" }}
+              style={{ width: "90px", height: "90px" }}
             >
-              <span className="fs-3 fw-bold text-secondary">0</span>
+              <span className="fs-2 fw-bold text-secondary">0</span>
             </div>
 
             <h3 className="fw-bold mb-2">Keranjang masih kosong</h3>
+
             <p className="text-secondary mb-4">
               Belum ada produk yang kamu tambahkan ke keranjang.
             </p>
 
-            <Link to="/products" className="btn btn-primary rounded-pill px-4">
+            <Link
+              to="/products"
+              className="btn btn-primary rounded-pill px-5 py-2"
+            >
               Mulai Belanja
             </Link>
           </div>
         ) : (
           <div className="row g-4">
+
             {/* CART ITEMS */}
             <div className="col-lg-8">
               <div className="bg-white rounded-4 shadow-sm border overflow-hidden">
+
                 {items.map((item) => (
-                  <div className="p-4 border-bottom" key={item.id}>
+                  <div
+                    className="p-5 border-bottom"
+                    key={item.id}
+                  >
                     <div className="row align-items-center g-4">
+
                       {/* PRODUCT */}
                       <div className="col-md-5">
-                        <div className="d-flex align-items-center gap-3">
+                        <div className="d-flex align-items-center gap-4">
+
                           <div
-                            className="flex-shrink-0 rounded-3 d-flex align-items-center justify-content-center"
+                            className="flex-shrink-0 rounded-4 overflow-hidden d-flex align-items-center justify-content-center"
                             style={{
-                              width: "80px",
-                              height: "80px",
-                              background:
-                                "linear-gradient(135deg, #ede9fe, #e0e7ff)",
+                              width: "150px",
+                              height: "150px",
+                              background: "#f5f3ff",
                             }}
                           >
-                            <span className="fs-3 fw-bold text-primary">
-                              {item.product.name.charAt(0).toUpperCase()}
-                            </span>
+                            {getImageUrl(item.product.image) ? (
+                              <img
+                                src={getImageUrl(item.product.image)}
+                                alt={item.product.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                  padding: "8px",
+                                }}
+                              />
+                            ) : (
+                              <span className="fs-1 fw-bold text-primary">
+                                {item.product.name.charAt(0).toUpperCase()}
+                              </span>
+                            )}
                           </div>
 
                           <div>
-                            <h6 className="fw-bold mb-1">{item.product.name}</h6>
-                            <small className="text-secondary">
+                            <h5 className="fw-bold mb-2">
+                              {item.product.name}
+                            </h5>
+
+                            <div className="text-secondary">
                               {item.product.store?.name ?? "-"}
-                            </small>
+                            </div>
                           </div>
+
                         </div>
                       </div>
 
                       {/* PRICE */}
                       <div className="col-md-2">
-                        <small className="text-secondary d-block mb-1">
+                        <small className="text-secondary d-block mb-2">
                           Harga
                         </small>
-                        <strong>{formatRupiah(item.product.price)}</strong>
+
+                        <strong className="fs-6">
+                          {formatRupiah(item.product.price)}
+                        </strong>
                       </div>
 
                       {/* QUANTITY */}
                       <div className="col-md-3">
-                        <small className="text-secondary d-block mb-1">
+                        <small className="text-secondary d-block mb-2">
                           Jumlah
                         </small>
+
                         <input
                           type="number"
-                          className="form-control"
+                          className="form-control form-control-lg"
                           defaultValue={item.quantity}
                           min="1"
                           max={item.product.stock}
                           onBlur={(e) =>
-                            handleUpdateQuantity(item.product.id, e.target.value)
+                            handleUpdateQuantity(
+                              item.product.id,
+                              e.target.value
+                            )
                           }
                         />
                       </div>
@@ -151,7 +191,9 @@ export default function Cart() {
                         <button
                           type="button"
                           className="btn btn-link text-danger text-decoration-none p-0"
-                          onClick={() => handleRemove(item.product.id)}
+                          onClick={() =>
+                            handleRemove(item.product.id)
+                          }
                         >
                           🗑️ Hapus Item
                         </button>
@@ -159,34 +201,48 @@ export default function Cart() {
                     </div>
 
                     {/* SUBTOTAL */}
-                    <div className="text-end mt-3">
-                      <small className="text-secondary">Subtotal</small>
-                      <div className="fw-bold text-primary">
+                    <div className="text-end mt-4 pt-3 border-top">
+                      <small className="text-secondary d-block mb-1">
+                        Subtotal
+                      </small>
+
+                      <div className="fw-bold fs-5 text-primary">
                         {formatRupiah(item.subtotal)}
                       </div>
                     </div>
                   </div>
                 ))}
+
               </div>
             </div>
 
             {/* SUMMARY */}
             <div className="col-lg-4">
               <div
-                className="bg-white rounded-4 shadow-sm border p-4 sticky-lg-top"
+                className="bg-white rounded-4 shadow-sm border p-5 sticky-lg-top"
                 style={{ top: "90px" }}
               >
-                <h5 className="fw-bold mb-4">Ringkasan Belanja</h5>
+                <h4 className="fw-bold mb-4">
+                  Ringkasan Belanja
+                </h4>
 
-                <div className="d-flex justify-content-between mb-3">
-                  <span className="text-secondary">Jumlah item</span>
-                  <strong>{totalQuantity}</strong>
+                <div className="d-flex justify-content-between mb-4">
+                  <span className="text-secondary">
+                    Jumlah item
+                  </span>
+
+                  <strong className="fs-5">
+                    {totalQuantity}
+                  </strong>
                 </div>
 
-                <div className="border-top pt-3">
+                <div className="border-top pt-4">
                   <div className="d-flex justify-content-between align-items-center">
-                    <span className="fw-semibold">Total</span>
-                    <strong className="fs-4 text-primary">
+                    <span className="fw-semibold">
+                      Total
+                    </span>
+
+                    <strong className="fs-3 text-primary">
                       {formatRupiah(total)}
                     </strong>
                   </div>
@@ -194,7 +250,7 @@ export default function Cart() {
 
                 <Link
                   to="/checkout"
-                  className="btn btn-primary w-100 rounded-pill py-3 mt-4"
+                  className="btn btn-primary w-100 rounded-pill py-3 mt-5"
                 >
                   Lanjut Checkout
                 </Link>
@@ -207,6 +263,7 @@ export default function Cart() {
                 </Link>
               </div>
             </div>
+
           </div>
         )}
       </div>

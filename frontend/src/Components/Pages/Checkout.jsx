@@ -27,6 +27,12 @@ export default function Checkout() {
   const formatRupiah = (value) =>
     "Rp " + Number(value ?? 0).toLocaleString("id-ID");
 
+  const getImageUrl = (image) => {
+    if (!image) return null;
+    if (image.startsWith("http")) return image;
+    return `http://127.0.0.1:8000/storage/${image}`;
+  };
+
   const handleCheckout = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -98,28 +104,47 @@ export default function Checkout() {
                 <div className="p-4 border-bottom" key={i}>
                   <div className="row align-items-center g-3">
                     {/* PRODUCT */}
-                    <div className="col-md-6">
-                      <div className="d-flex align-items-center gap-3">
-                        <div
-                          className="flex-shrink-0 rounded-3 d-flex align-items-center justify-content-center"
-                          style={{
-                            width: "64px",
-                            height: "64px",
-                            background: "linear-gradient(135deg, #ede9fe, #e0e7ff)",
-                          }}
-                        >
-                          <span className="fw-bold fs-5 text-primary">
-                            {item.product.name.charAt(0).toUpperCase()}
-                          </span>
-                        </div>
-                        <div>
-                          <h6 className="fw-bold mb-1">{item.product.name}</h6>
-                          <small className="text-secondary">
-                            {item.product.store?.name ?? "-"}
-                          </small>
+                    <div className="col-md-5">
+                        <div className="d-flex align-items-center gap-4">
+
+                          <div
+                            className="flex-shrink-0 rounded-4 overflow-hidden d-flex align-items-center justify-content-center"
+                            style={{
+                              width: "150px",
+                              height: "150px",
+                              background: "#f5f3ff",
+                            }}
+                          >
+                            {getImageUrl(item.product.image) ? (
+                              <img
+                                src={getImageUrl(item.product.image)}
+                                alt={item.product.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                  padding: "8px",
+                                }}
+                              />
+                            ) : (
+                              <span className="fs-1 fw-bold text-primary">
+                                {item.product.name.charAt(0).toUpperCase()}
+                              </span>
+                            )}
+                          </div>
+
+                          <div>
+                            <h5 className="fw-bold mb-2">
+                              {item.product.name}
+                            </h5>
+
+                            <div className="text-secondary">
+                              {item.product.store?.name ?? "-"}
+                            </div>
+                          </div>
+
                         </div>
                       </div>
-                    </div>
 
                     {/* QUANTITY */}
                     <div className="col-md-2">
