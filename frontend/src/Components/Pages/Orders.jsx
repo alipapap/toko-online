@@ -315,7 +315,7 @@ export default function Orders() {
                           to={`/orders/${order.id}`}
                           className="btn btn-outline-primary rounded-pill px-4"
                         >
-                          Detail
+                          Detail Produk
                         </Link>
 
                       </div>
