@@ -121,8 +121,8 @@ export default function Payment() {
                       />
                       <div>
                         <div className="fw-bold">Transfer Bank</div>
-                        <div className="text-secondary small mt-1">
-                         TAMBAHIN NAMA NAMA BANKNYA
+                       <div className="text-secondary small mt-1">
+                       BCA, Mandiri, BNI, BRI
                         </div>
                       </div>
                     </div>
