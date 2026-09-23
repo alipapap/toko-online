@@ -13,6 +13,7 @@ export default function Payment() {
   const [submitting, setSubmitting] = useState(false);
 
   const [method, setMethod] = useState("Transfer Bank");
+  const [bankProvider, setBankProvider] = useState("");
   const [ewalletProvider, setEwalletProvider] = useState("");
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function Payment() {
     "Rp " + Number(value ?? 0).toLocaleString("id-ID");
 
   const showQr = method === "Transfer Bank" || method === "E-Wallet";
+  const showBankProviders = method === "Transfer Bank";
   const showEwalletProviders = method === "E-Wallet";
 
   const handleSubmit = async (e) => {
@@ -119,11 +121,35 @@ export default function Payment() {
                         onChange={(e) => setMethod(e.target.value)}
                         className="form-check-input mt-1"
                       />
-                      <div>
+                      <div className="w-100">
                         <div className="fw-bold">Transfer Bank</div>
-                       <div className="text-secondary small mt-1">
-                       BCA, Mandiri, BNI, BRI
+                        <div className="text-secondary small mt-1">
+                          BCA, Mandiri, BNI, BRI
                         </div>
+
+                        {showBankProviders && (
+                          <div className="mt-3">
+                            <div className="d-flex flex-wrap gap-2">
+                              {["BCA", "Mandiri", "BNI", "BRI"].map((b) => (
+                                <button
+                                  key={b}
+                                  type="button"
+                                  className={`btn btn-sm rounded-pill px-3 ${
+                                    bankProvider === b
+                                      ? "btn-primary"
+                                      : "btn-outline-secondary"
+                                  }`}
+                                  onClick={() => setBankProvider(b)}
+                                >
+                                  {b}
+                                </button>
+                              ))}
+                            </div>
+                            <div className="text-secondary small mt-2">
+                              Semua bank di atas mendukung scan QR yang sama di bawah.
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </label>
