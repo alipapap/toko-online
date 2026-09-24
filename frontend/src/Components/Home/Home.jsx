@@ -46,7 +46,7 @@ export default function Home() {
                   fontWeight: 700,
                 }}
               >
-                🛍️ Belanja lebih mudah di TokoKita
+                 Belanja lebih mudah di TokoKita
               </span>
 
               <h1 className="fw-bold display-4 mb-3">
@@ -61,13 +61,13 @@ export default function Home() {
 
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/products" className="btn btn-light btn-lg rounded-3 fw-bold">
-                  🛒 Mulai Belanja
+                   Mulai Belanja
                 </Link>
                 
                  <a href="#toko"
                   className="btn btn-outline-light btn-lg rounded-3 fw-bold"
                 >
-                  🏪 Jelajahi Toko
+                   Jelajahi Toko
                 </a>
               </div>
             </div>
@@ -95,12 +95,6 @@ export default function Home() {
         <div className="row g-3 mb-5">
           <div className="col-md-4">
             <div className="bg-white border rounded-4 p-4 d-flex align-items-center gap-3 h-100">
-              <div
-                className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
-                style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
-              >
-                🛍️
-              </div>
               <div>
                 <h6 className="fw-bold mb-1">Belanja Praktis</h6>
                 <p className="text-secondary small mb-0">Pilih produk tanpa ribet.</p>
@@ -110,12 +104,6 @@ export default function Home() {
 
           <div className="col-md-4">
             <div className="bg-white border rounded-4 p-4 d-flex align-items-center gap-3 h-100">
-              <div
-                className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
-                style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
-              >
-                🏪
-              </div>
               <div>
                 <h6 className="fw-bold mb-1">Banyak Toko</h6>
                 <p className="text-secondary small mb-0">Temukan berbagai penjual.</p>
@@ -125,12 +113,6 @@ export default function Home() {
 
           <div className="col-md-4">
             <div className="bg-white border rounded-4 p-4 d-flex align-items-center gap-3 h-100">
-              <div
-                className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
-                style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
-              >
-                📦
-              </div>
               <div>
                 <h6 className="fw-bold mb-1">Pesanan Terorganisir</h6>
                 <p className="text-secondary small mb-0">Pantau pesanan dengan mudah.</p>
@@ -142,7 +124,7 @@ export default function Home() {
         {/* ===================== TOKO PILIHAN ===================== */}
         <div className="mb-5" id="toko">
           <div className="mb-4">
-            <h3 className="fw-bold mb-1">🏪 Temukan Toko</h3>
+            <h3 className="fw-bold mb-1"> Temukan Toko</h3>
             <p className="text-secondary mb-0">Jelajahi toko yang tersedia di TokoKita.</p>
           </div>
 
@@ -180,7 +162,7 @@ export default function Home() {
                 className="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
                 style={{ width: "48px", height: "48px", background: "#f1edff", fontSize: "22px" }}
               >
-                🏪
+                
               </div>
               <div>
                 <h6 className="fw-bold mb-1">Belum ada toko</h6>
@@ -197,12 +179,6 @@ export default function Home() {
             style={{ background: "#111827" }}
           >
             <div>
-              <div
-                className="fw-bold mb-2"
-                style={{ color: "#c4b5fd", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px" }}
-              >
-                ✨ Saatnya Belanja
-              </div>
               <h3 className="fw-bold mb-2">Satu tempat untuk banyak kebutuhan.</h3>
               <p className="mb-0" style={{ color: "#cbd5e1", maxWidth: "600px" }}>
                 Tidak perlu berpindah-pindah. Temukan produk dari berbagai
@@ -220,7 +196,7 @@ export default function Home() {
           <div className="mb-5">
             <div className="d-flex justify-content-between align-items-end mb-4">
               <div>
-                <h3 className="fw-bold mb-1">✨ Sedang Banyak Dilihat</h3>
+                <h3 className="fw-bold mb-1"> Sedang Banyak Dilihat</h3>
                 <p className="text-secondary mb-0">Beberapa produk pilihan dari TokoKita.</p>
               </div>
               <Link to="/products" className="text-decoration-none fw-bold" style={{ color: "#6d28d9" }}>
@@ -251,6 +227,12 @@ export default function Home() {
                       <small className="text-secondary">{product.store?.name ?? "TokoKita"}</small>
                       <h6 className="fw-bold my-1">{product.name}</h6>
                       <div className="fw-bold text-primary">{formatRupiah(product.price)}</div>
+                      <Link
+                        to={`/products/${product.id}`}
+                        className="btn btn-primary w-100 rounded-pill"
+                      >
+                        Lihat Detail
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -259,24 +241,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* ===================== FINAL CTA ===================== */}
-        <div className="mb-4">
-          <div
-            className="rounded-4 p-5 text-white d-flex flex-wrap justify-content-between align-items-center gap-4"
-            style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }}
-          >
-            <div>
-              <div className="fw-bold mb-2" style={{ color: "#ddd6fe", fontSize: "12px", textTransform: "uppercase" }}>
-                TOKOKITA
-              </div>
-              <h3 className="fw-bold mb-2">Sudah siap mulai belanja?</h3>
-              <p className="mb-0">Temukan produk favoritmu sekarang.</p>
-            </div>
-            <Link to="/products" className="btn btn-light btn-lg rounded-3 fw-bold">
-              🛒 Belanja Sekarang
-            </Link>
-          </div>
-        </div>
       </div>
     </Layout>
   );
