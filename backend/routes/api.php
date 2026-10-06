@@ -39,6 +39,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/payment/{order}', [PaymentController::class, 'store']);
 });
 
+// MIDTRANS WEBHOOK
+Route::post('/payment/notification', [PaymentController::class, 'notification']);
+
 // QR code diakses via <img>
 // Sengaja di luar auth:sanctum
 Route::get('/payment/{order}/qr', [PaymentController::class, 'qrCode']);
